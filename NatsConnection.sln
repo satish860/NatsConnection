@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33403.182
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NatsConnection", "NatsConnection\NatsConnection.csproj", "{D859255D-82F2-4729-89FA-DEE40D9F6121}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Subscribe", "Subscribe\Subscribe.csproj", "{2E0CEEF9-BC6E-4D72-9D0E-B51A4EEC3979}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D859255D-82F2-4729-89FA-DEE40D9F6121}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D859255D-82F2-4729-89FA-DEE40D9F6121}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D859255D-82F2-4729-89FA-DEE40D9F6121}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D859255D-82F2-4729-89FA-DEE40D9F6121}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E0CEEF9-BC6E-4D72-9D0E-B51A4EEC3979}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E0CEEF9-BC6E-4D72-9D0E-B51A4EEC3979}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E0CEEF9-BC6E-4D72-9D0E-B51A4EEC3979}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E0CEEF9-BC6E-4D72-9D0E-B51A4EEC3979}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {507159A2-FF06-4F6A-A964-515B86A684D6}
+	EndGlobalSection
+EndGlobal
