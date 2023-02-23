@@ -9,18 +9,19 @@ using TcpClient = NetCoreServer.TcpClient;
 
 namespace NatsConnection
 {
-    public class NatsConnection : TcpClient
+    public class NatsConnection : TcpClient, INatsConnection
     {
         private bool _stop;
         public NatsConnection(string address, int port) : base(address, port)
         {
-          _ = Task.Run(() => { this.ReceiveAsync(); });  
+
         }
 
         protected override void OnConnected()
         {
             Console.WriteLine($"Chat TCP client connected a new session with Id {Id}");
         }
+
 
         protected override void OnDisconnected()
         {
@@ -45,5 +46,10 @@ namespace NatsConnection
         }
 
 
+
+        public ValueTask<bool> SendAsync(int id, byte[] bytes)
+        {
+            return ValueTask.FromResult(this.SendAsync(bytes));
+        }
     }
 }

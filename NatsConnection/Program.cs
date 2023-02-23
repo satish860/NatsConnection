@@ -24,15 +24,12 @@ namespace NatsConnection
             var connectCommand = $"CONNECT {optionsJson}\r\n";
             var encodedCommand = Encoding.UTF8.GetBytes(connectCommand);
             natsConnection.SendAsync(encodedCommand);
-            SubscribeData(natsConnection);
-            _ = Task.Run(() => PingPeriodically(natsConnection, new CancellationToken()));
-            _ = Task.Run(() => PublishContinously(natsConnection, new CancellationToken()));
-            //foreach (var item in Enumerable.Range(0,10000))
-            //{
-            //    PublishData(natsConnection, new Person());
-            //}
-
-
+            PingPeriodically(natsConnection, new CancellationToken());
+            INatsPublisher natsPublisher = new NatsPublisher(natsConnection);
+            Dictionary<string,string> keyValuePairs= new Dictionary<string,string>();
+            keyValuePairs.Add("Hello", "World");
+            await natsPublisher.PublishAsync<Person>("cli.demo", new Person { }, keyValuePairs);
+            //PublishContinously(natsConnection, new CancellationToken());
             Console.ReadKey();
 
             UnSubscribe(natsConnection);
@@ -52,14 +49,13 @@ namespace NatsConnection
 
         public static async void PublishData(NatsConnection natsConnection, Person person)
         {
-            Console.WriteLine("I am publishing the data");
             var publishCommand = JsonSerializer.Serialize(person);
             var encodedCommand = Encoding.UTF8.GetBytes(publishCommand);
             var pubCommand = Encoding.UTF8.GetBytes($"PUB FOO {encodedCommand.Length}\r\n{publishCommand}\r\n");
             natsConnection.SendAsync(pubCommand);
         }
 
-        public static async void SubscribeData(NatsConnection natsConnection)
+        public static async Task SubscribeData(NatsConnection natsConnection)
         {
             var pubCommand = Encoding.UTF8.GetBytes($"SUB bar 1\r\n");
             natsConnection.SendAsync(pubCommand);
@@ -103,10 +99,10 @@ namespace NatsConnection
 
         public static async void PublishContinously(NatsConnection natsConnection, CancellationToken cancellationToken)
         {
-            var periodicTimer = new PeriodicTimer(TimeSpan.FromSeconds(10));
+            var periodicTimer = new PeriodicTimer(TimeSpan.FromSeconds(1));
             while (!cancellationToken.IsCancellationRequested)
             {
-                PublishDataWithHeader(natsConnection, new Person());
+                PublishData(natsConnection, new Person());
                 await periodicTimer.WaitForNextTickAsync(cancellationToken).ConfigureAwait(false);
             }
         }

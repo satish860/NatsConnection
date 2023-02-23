@@ -19,7 +19,7 @@ namespace NatsConnection
 
         /// <summary>Turns on +OK protocol acknowledgements.</summary>
         [JsonPropertyName("verbose")]
-        public bool Verbose { get; init; } = true;
+        public bool Verbose { get; init; }
 
         /// <summary>Turns on additional strict format checking, e.g. for properly formed subjects</summary>
         [JsonPropertyName("pedantic")]
