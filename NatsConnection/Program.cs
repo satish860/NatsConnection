@@ -24,11 +24,12 @@ namespace NatsConnection
             var connectCommand = $"CONNECT {optionsJson}\r\n";
             var encodedCommand = Encoding.UTF8.GetBytes(connectCommand);
             natsConnection.SendAsync(encodedCommand);
+            SubscribeData(natsConnection);
             PingPeriodically(natsConnection, new CancellationToken());
             INatsPublisher natsPublisher = new NatsPublisher(natsConnection);
             Dictionary<string,string> keyValuePairs= new Dictionary<string,string>();
             keyValuePairs.Add("Hello", "World");
-            await natsPublisher.PublishAsync<Person>("cli.demo", new Person { }, keyValuePairs);
+            await natsPublisher.PublishAsync<Person>("FOO", new Person { }, keyValuePairs);
             //PublishContinously(natsConnection, new CancellationToken());
             Console.ReadKey();
 

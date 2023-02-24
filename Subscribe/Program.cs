@@ -17,11 +17,12 @@ namespace Subscribe
 
             Console.WriteLine("Subscription started and ready for publish press enter");
             Console.ReadKey();
-            //foreach (var item in Enumerable.Range(1,100000))
-            //{
-            //    await conn.PublishAsync<string>("bar", "Hello World!!");
-            //}
-           
+            foreach (var item in Enumerable.Range(1, 10))
+            {
+                Console.WriteLine(item);
+                await conn.PublishAsync<string>("bar", $"{item}: Hello World!!");
+            }
+
 
             Console.ReadKey();
 
